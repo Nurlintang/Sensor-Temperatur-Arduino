@@ -6,7 +6,7 @@ LiquidCrystal lcd(13, 12, 11, 10, 9, 8);
 const int merah1 = 6; 
 const int hijau2 = 5; 
 const int biru3 = 4; 
-const int piezo = 2; 
+const int piezo = 7; 
 const int sensor = A0; 
 float out_sensor;
 float celcius_sensor;
@@ -29,7 +29,7 @@ void setup() {
 
 void loop() { 
  out_sensor = analogRead(sensor);
- celcius_sensor = ((out_sensor * (16000/1024))-500)/10;
+ celcius_sensor = ((out_sensor * (5200/1024))-500)/10;
   
   if(celcius_sensor >= -40 && celcius_sensor < 6){
   {{
@@ -43,7 +43,7 @@ void loop() {
     digitalWrite(merah1, LOW); 
     digitalWrite(hijau2, LOW);
     digitalWrite(biru3, LOW);
-    tone(piezo,300); 
+    tone(piezo, 300); 
   }
    delay(200);}
     
@@ -55,10 +55,10 @@ void loop() {
    lcd.print (celcius_sensor);
    lcd.setCursor(14,1);
    lcd.print ("C               ");
-   
+   noTone(piezo);
   }
   
-  else if(celcius_sensor >= 6 && celcius_sensor < 16){
+  else if(celcius_sensor >= 6 && celcius_sensor < 23){
   {{
     digitalWrite(merah1, HIGH); 
     digitalWrite(hijau2, HIGH);
@@ -87,7 +87,7 @@ void loop() {
    noTone(piezo); 
   }
   
-  else if(celcius_sensor >= 16 && celcius_sensor < 39){
+  else if(celcius_sensor >= 23 && celcius_sensor < 39){
   {{
     digitalWrite(merah1, HIGH); 
     digitalWrite(hijau2, HIGH);
